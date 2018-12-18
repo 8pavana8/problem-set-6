@@ -1,3 +1,4 @@
+
 /*
  * Hello. 2 points.
  *
@@ -11,7 +12,11 @@
  */
 
 function sayHello() {
-
+    let canvas = document.getElementById('canvas1');
+  const context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.font = '48px sans-serif';
+  context.strokeText('Hello, World!', 10, 50);
 }
 
 /*
@@ -38,6 +43,19 @@ function sayHello() {
  */
 
 function drawRectangle() {
+  let canvas = document.getElementById(“canvas2”);
+  let ctx = canvas.getContext(“2d”);
+   ctx.clearRect(0, 0, canvas.width, canvas.height)
+   while(true){
+     let width= prompt("Please enter valid width"))
+     let height= prompt("Please enter valid height"))
+     let x= prompt("Enter a valid topLeft x"))
+     let y= prompt("Enter a valid topLeft y"))
+     if(width>=1 && height>=1 && x>=5 && y>=5 && canvas.width-x-width>=0 && canvas.height-y-height>=0){
+       break;
+      }
+   ctx.strokeRect(x, y, width, height);
+
 
 }
 
@@ -67,6 +85,37 @@ function drawRectangle() {
  */
 
 function drawColoredRectangle() {
+let canvas3 = document.getElementById("canvas3");
+let color = prompt(“Select a color.");
+ let ctx = canvas3.getContext("2d");
+
+  switch(color) {
+   case "black":
+     ctx.fillStyle = "black";
+     break;
+   case "blue":
+     ctx.fillStyle = "blue";
+     break;
+   case "green":
+     ctx.fillStyle = "green";
+     break;
+   case "orange":
+     ctx.fillStyle = "orange";
+     break;
+   case "purple":
+     ctx.fillStyle = "purple";
+     break;
+   case "red":
+     ctx.fillStyle = "red";
+     break;
+   case "yellow":
+     ctx.fillStyle = "yellow";
+     break;
+   default:
+     alert(color + " is not a supported color. Please try again.");
+     break;
+   }
+     ctx.fillRect(10, 10, 100, 50);
 
 }
 
@@ -101,6 +150,43 @@ function drawColoredRectangle() {
 
 function drawTriangle() {
 
+  let x=10;
+   let y=10;
+   let a;
+   let b;
+   let c;
+   let canvas = document.getElementById("canvas4");
+   let context = canvas.getContext("2d");
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   while(true){
+  	a=Number(prompt("Enter side 1 length"));
+  	b=Number(prompt("Enter side 2 length"));
+  	c=Number(prompt("Enter side 3 length"));
+  	if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.height-y-b>=0){
+  		break;
+  	}else{
+  		alert("That is not a valid triangle")
+  	}
+   }
+
+  context.beginPath();
+  context.moveTo(x,y);
+  context.lineTo(x,y+a);
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(x,y+a);
+  context.lineTo(x+b,y+a);
+  context.stroke();
+
+  context.beginPath();
+  context.moveTo(x,y);
+  context.lineTo(x+b,y+a);
+  context.stroke();
+
+
+
+
 }
 
 /*
@@ -124,6 +210,43 @@ function drawTriangle() {
 
 function drawSmileyFace() {
 
+   let radius;
+   let canvas = document.getElementById('canvas5');
+   let ctx = canvas.getContext('2d');
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  	while(true){
+  		radius = Number(prompt("Please enter the radius of the head."));
+  		if(radius >= 1 && radius <= canvas.width && Number.isInteger(radius)){
+  			break;
+  		}
+  	}
+   let x = canvas.width;
+   let y = canvas.height;
+   let eyeRadius = radius * .1
+   let mouthRadius = radius * .7
+   ctx.beginPath();
+   ctx.arc(x / 2, y / 2, radius, 0, Math.PI * 2);
+   ctx.stroke();
+
+
+
+   ctx.beginPath();
+   ctx.arc(x / 2 - radius / 3, y / 2 - radius / 4, eyeRadius,0, Math.PI * 2);
+   ctx.stroke();
+
+
+
+   ctx.beginPath();
+   ctx.arc(x / 2 + radius / 3, y / 2 - radius / 4, eyeRadius,0, Math.PI * 2);
+   ctx.stroke();
+
+
+
+   ctx.beginPath();
+   ctx.arc(x / 2, y / 2, mouthRadius,0, Math.PI);
+   ctx.stroke();
+   }
+
 }
 
 /*
@@ -145,7 +268,37 @@ function drawSmileyFace() {
  */
 
 function drawStar() {
+  let canvas = document.getElementById('canvas6');
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+      let outerRadius=Number(prompt("Enter a valid outer radius"));
+      let innerRadius=Number(prompt("Enter a valid inner radius"));
+      if (outerRadius>=innerRadius && canvas.width>=outerRadius+125 && canvas.height>=outerRadius+125 && innerRadius>=1 && outerRadius>=1){
+        let points=5;
+        let outerx=[];
+        let outery=[];
+        let innerx=[];
+        let innery=[];
+        for(let i=0;i<points;i++){
+          outerx.push(Math.cos((Math.PI*2*i)/points-(Math.PI/2))*outerRadius+125);
+          outery.push(Math.sin((Math.PI*2*i)/points-(Math.PI/2))*outerRadius+125);
+          innerx.push(Math.cos(((Math.PI*2*i)/points)-(Math.PI/2)+(Math.PI/points))*innerRadius+125);
+          innery.push(Math.sin(((Math.PI*2*i)/points)-(Math.PI/2)+(Math.PI/points))*innerRadius+125);
+        }
+        ctx.beginPath();
+        ctx.moveTo(outerx[0], outery[0]);
+        for(let j=0;j<outerx.length;j++){
+          ctx.lineTo(innerx[j], innery[j]);
+          ctx.lineTo(outerx[j+1], outery[j+1]);
+        }
+        ctx.lineTo(outerx[0], outery[0]);
+        ctx.stroke();
+        ctx.closePath();
+    }
+    else{
+        alert('invalid inputs');
+      }
 }
 
 /*
@@ -165,6 +318,26 @@ function drawStar() {
 
 function drawStopSign() {
 
+   let radius = 40 / Math.sin(0.125 * Math.PI);
+   let canvas = document.getElementById('canvas7');
+   const context = canvas.getContext('2d');
+   context.clearRect(0, 0, canvas.width, canvas.height);
+   context.beginPath();
+   context.moveTo(Math.cos(0.125 * Math.PI) * radius + 110, Math.sin(0.125 * Math.PI) * radius + 110);
+   let x = 0;
+   let angle = 0.25 * Math.PI;
+   while (x < 8) {
+     context.lineTo(Math.cos(0.125 * Math.PI + angle) * radius + 110, Math.sin(0.125 * Math.PI + angle) * radius + 110);
+     angle = angle + 0.25 * Math.PI;
+     x = x + 1;
+   }
+   context.closePath();
+   context.fillStyle = "red";
+   context.fill();
+   context.font = "65px Arial";
+   context.fillStyle = "white";
+   context.fillText("STOP", 22, 130);
+   lineWidth = 1;
 }
 
 /*
