@@ -11,14 +11,12 @@
  * click the "Hello" button, your output should match that of the example.
  */
 function sayHello() {
-  let canvas1 = document.getElementById("canvas1");
-  let context = canvas1.getContext("2d");
-  context.font = "48px sans-serif";
-  context.strokeText("Hello, World!", 10, 50);
+
+ let hello = document.getElementById("canvas1").getContext('2d')
+ hello.font = '48px sans-serif';
+ hello.strokeText('Hello, World!', 10, 50);
+
 }
- 
-  context.font = '48px sans-serif';
- 
 
 /*
  * Rectangle. 3 points.
@@ -44,25 +42,17 @@ function sayHello() {
  */
 
 function drawRectangle() {
-  let canvas2 = document.getElementById("canvas2");
-  let ctx = canvas2.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height)
-  while(true){
-    var width=Number(prompt("Pleas input a valid width"))
-    var height=Number(prompt("Please input a valid height"))
-    var x=Number(prompt("Please input x coordinate"))
-    var y=Number(prompt("Please input y coordinate"))
-    if(width>=1 && height>=1 && x>=5 && y>=5 && canvas.width-x-width>=0 && canvas.height-y-height>=0){
-      break;
-    }
-  }
-  ctx.strokeRect(x, y, width, height);
-
+  
+let height = prompt("Input rectangle height.");
+let width = prompt("Input rectangle width.");
+let xCoord = prompt("Input x coordinate.");
+let yCoord = prompt("Input y coordinate.");
+let rectangle = document.getElementById("canvas2");
+if (rectangle.getContext){
+  let drawing = rectangle.getContext("2d");
+  drawing.strokeRect(xCoord, yCoord, width, height);
 }
-
-
 }
-
 /*
  * Color. 3 points.
  *
@@ -89,40 +79,20 @@ function drawRectangle() {
  */
 
 function drawColoredRectangle() {
-function drawColoredRectangle() {
-    let canvas3 = document.getElementById("canvas3");
-    let color = prompt("Select a color.");
-    let ctx = canvas3.getContext("2d");
+let colrectangle = document.getElementById("canvas3");
+  let draw = rec.getContext("2d");
+  draw.clearRect(0, 0, colrectangle.width, colrectangle.height);
 
-switch(color) {
-  case "black":
-    ctx.fillStyle = "black";
-    break;
-  case "blue":
-    ctx.fillStyle = "blue";
-    break;
-  case "green":
-    ctx.fillStyle = "green";
-    break;
-  case "orange":
-    ctx.fillStyle = "orange";
-    break;
-  case "purple":
-    ctx.fillStyle = "purple";
-    break;
-  case "red":
-    ctx.fillStyle = "red";
-    break;
-  case "yellow":
-    ctx.fillStyle = "yellow";
-    break;
-  default:
-    alert(color + " is not available. Choose another color.");
-    break;
+  let color;
+  while(true){
+    color=prompt("Input a valid color")
+    if(color=="black" || color=="blue" || color=="green" || color=="orange" || color=="purple" || color=="red" || color=="yellow") { {
+      break;
+    }
   }
-    ctx.fillRect(10, 10, 100, 50);
+  draw.fillStyle=color;
+  draw.fillColrectangle(10,10,100,50);
 }
-
 /*
  * Triangle. 5 points.
  *
@@ -153,30 +123,39 @@ switch(color) {
  */
 
 function drawTriangle() {
-const canvas4 = document.getElementById("canvas4");
-  const context = canvas4.getContext("2d");
-  context.clearRect(0,0,canvas.width,canvas.height);
-  x = Number(prompt("Side 1:"));
-  y = Number(prompt("Side 2:"));
-  z = Number(prompt("Side 3:"));
-  if (isNaN(x) || isNaN(y) || isNaN(z) == true)
-  {
-    alert("One of your inputs is not valid.");
-  }else if ((x * x) + (y * y) != (z * z)) {
-    alert("Sorry, not a valid right triangle.");
-  }else if (x > canvas.height || y > canvas.width) {
-    alert("The triangle fails to fit on the canvas.")
-  }else{
-    context.beginPath();
-    context.moveTo(10,10);
-    context.lineTo(10,10+x);
-    context.lineTo(10+y,10+x);
-    context.closePath();
-    context.stroke();
-}
-}
- 
+let x=10;
+  let y=10;
+  let a;
+  let b;
+  let c;
+  let canvas = document.getElementById("canvas4");
+  let context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  while(true){
+	a=Number(prompt("Enter side 1 length"));
+	b=Number(prompt("Enter side 2 length"));
+	c=Number(prompt("Enter side 3 length"));
+	if(((a**2) + (b**2) == (c**2)) && a>0 && b>0 && c>0 && canvas.width-x-a>=0 && canvas.height-y-b>=0){
+		break;
+	}else{
+		alert("Not a valid triangle")
+	}
+  }
 
+ context.beginPath();
+ context.moveTo(x,y);
+ context.lineTo(x,y+a);
+ context.stroke();
+
+ context.beginPath();
+ context.moveTo(x,y+a);
+ context.lineTo(x+b,y+a);
+ context.stroke();
+
+ context.beginPath();
+ context.moveTo(x,y);
+ context.lineTo(x+b,y+a);
+ context.stroke();
 
 }
 
@@ -200,31 +179,36 @@ const canvas4 = document.getElementById("canvas4");
  */
 
 function drawSmileyFace() {
- let radius = prompt("Please enter a radius:");
-  let canvas5 = document.getElementById("canvas5");
-  const context = canvas5.getContext("2d");
-  context.clearRect(0, 0, canvas5.width, canvas5.height);
-  radius = Number(radius);
-  if (isNaN(radius) == true) {
-    alert("Your input is not a number.");
-  } else if (radius < 1) {
-    alert("Your radius is too small.");
-  } else if (radius > 250.5){
-    alert("The smiley face will not fit on the canvas.");
-  } else {
-    context.beginPath();
-    context.arc(radius + 10, radius + 10, radius, 0 * Math.PI, 2 * Math.PI);
-    context.moveTo(1.7 * radius + 10, radius + 10);
-    context.arc(radius + 10, radius + 10, 0.7 * radius, 0 * Math.PI, Math.PI);
-    context.moveTo(0.8 * radius + 10, 0.7 * radius + 10);
-    context.arc(0.7 * radius + 10, 0.7 * radius + 10, 0.1 * radius, 0 * Math.PI, 2 * Math.PI);
-    context.moveTo(1.4 * radius + 10, 0.7 * radius + 10);
-    context.arc(1.3 * radius + 10, 0.7 * radius + 10, 0.1 * radius, 0 * Math.PI, 2 * Math.PI);
-    context.closePath();
-    context.stroke();
-    lineWidth = 1;
+ let radius;
+  let canvas = document.getElementById("canvas5");
+  let ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+	while(true){
+		radius=Number(prompt("Input radius"));
+		if(radius>=1 && radius<=canvas.width && Number.isInteger(radius)){
+			break;
+		}
+	}
+  let x=canvas.width;
+  let y=canvas.height;
+  let eyeRadius=radius*.1
+  let mouthRadius=radius*.7
+  ctx.beginPath();
+  ctx.arc(x/2, y/2, radius, 0, Math.PI*2); // Face
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(x/2 - radius/3, y/2-radius/4, eyeRadius,0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(x/2+radius/3, y/2-radius/4, eyeRadius,0, Math.PI*2);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(x/2, y/2, mouthRadius,0, Math.PI);
+  ctx.stroke();
   }
-}
 
 
 
@@ -247,50 +231,37 @@ function drawSmileyFace() {
  */
 
 function drawStar() {
- let canvas6 = document.getElementById("canvas6");
-	let ctxt = canvas6.getContext("2d");
-	ctxt.clearRect(0, 0, canvas6.width, canvas6.height);
-
-	let innerRadius;
-	let outerRadius;
-  let numPoints = 10;
-	let ctrx = 125;
-	let ctry = 125;
-	let youtpoiny = [];
-	let xoutpoint = [];
-	let yinpoint = [];
-	let xinpoint = [];
-	let draw = false;
-
-	outerRadius = Number(prompt("Input the outer radius of the star."));
-	innerRadius = Number(prompt("Input the inner radius of the star."));
-	numPoints = Number(prompt("Input the number of points."));
-
-	if(outerRadius >=innerRadius && canv.width >= outerRadius + 125 &&
-		canvas6.height >= outerRadius + 125 && innerRadius>=1 && outerRadius>=1) {
-		draw = true;
-	}
-	else{alert("Input Not Valid. Try again.");}
-
-	for (let i=0;i<numPoints;i++) {
-		xoutpoint.push(ctrx + outerRadius * (Math.cos(Math.PI * 2 * i/numPoints - Math.PI / 2)));
-		youtpoiny.push(ctry + outerRadius * (Math.sin(Math.PI * 2 * i / numPoints - Math.PI / 2)));
-		xinpoint.push(ctrx + innerRadius * (Math.cos(Math.PI * 2 * i / numPoints + Math.PI / numPoints - Math.PI / 2)));
-		yinpoint.push(ctry + innerRadius * (Math.sin(Math.PI * 2 * i / numPoints + Math.PI / numPoints - Math.PI / 2)));
-	}
-
-	if(draw) {
-		ctxt.beginPath();
-		ctxt.moveTo(xoutpoint[0], youtpoiny[0]);
-		for(let j=0;j<numPoints;j++) {
-			ctxt.lineTo(xinpoint[j], yinpoint[j]);
-			ctxt.lineTo(xoutpoint[j+1], youtpoiny[j+1]);
-		}
-			ctxt.lineTo(xoutpoint[0], youtpoiny[0]);
-			ctxt.closePath();
-			ctxt.stroke();
-	}
+  let star = document.getElementById("canvas6").getContext('2d');
+let outerRadius = Number(prompt(" Choose Outer Radius:"));
+  let innerRadius = Number(prompt(" Choose Inner Radius:"));
+  let canvas = document.getElementById('canvas6');
+  const context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  if (isNaN(outerRadius) == true || isNaN(innerRadius) == true) {
+    alert("One input is not a number.");
+  } else if (outerRadius < 2) {
+    alert("Outer radius is too small.");
+  } else if (innerRadius < 1) {
+    alert("Inner radius is too small.");
+  } else if (outerRadius <= innerRadius) {
+    alert("Outer radius must be larger than inner radius.")
+  } else {
+    context.beginPath();
+    context.moveTo(125, 125 - outerRadius);
+   let x = 0;
+    let angle = 0 * Math.PI;
+    while (x < 5) {
+      context.lineTo(Math.cos(1.3 * Math.PI - angle) * innerRadius + 125, Math.sin(1.3 * Math.PI - angle) * innerRadius + 125);
+      context.lineTo(Math.cos(1.1 * Math.PI - angle) * outerRadius + 125, Math.sin(1.1 * Math.PI - angle) * outerRadius + 125);
+      angle = angle + 0.4 * Math.PI;
+      x = x + 1;
+  }
+  context.closePath();
+  context.stroke();
+  lineWidth = 1;
 }
+}
+
 
 /*
  * Stop Sign. 7 points.
